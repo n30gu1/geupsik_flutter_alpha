@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:geupsik_flutter_alpha/parser.dart';
 import 'package:intl/intl.dart';
 
@@ -34,14 +35,8 @@ class Home extends StatelessWidget {
         child: FutureBuilder(
           future: initiate(DateTime.now()),
           builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-              case ConnectionState.waiting:
-                return Center(
-                  child: CircularProgressIndicator()
-                );
-              default:
-                return Padding(
+            if (snapshot.connectionState == ConnectionState.done)
+              return Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +60,10 @@ class Home extends StatelessWidget {
                     ],
                   ),
                 );
-            }
+              else
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
           }
         ),
       ),
