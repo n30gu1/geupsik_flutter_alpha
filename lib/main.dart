@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geupsik_flutter/parser.dart';
+import 'package:geupsik_flutter_alpha/parser.dart';
 import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
@@ -26,7 +26,6 @@ class MyApp extends StatelessWidget {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     DateFormat formatter = DateFormat('yyyy년 M월 d일 식단표');
 
     return Padding(
