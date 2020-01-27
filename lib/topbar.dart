@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'dateprovider.dart';
+import 'package:provider/provider.dart';
 
 class TopBar extends StatelessWidget {
+  Future<Null> _selectDate(BuildContext context) async {
+    var p = Provider.of<DateSelector>(context, listen: false);
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: p.selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != p.selectedDate)
+      p.setDate(picked);
+  }
+
   @override
   Widget build(BuildContext context) {
+    var p = Provider.of<DateSelector>(context);
     DateFormat formatter = DateFormat('yyyy년 M월 d일');
     return Container(
       width: double.infinity,
@@ -29,13 +43,13 @@ class TopBar extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                print('tapped');
+                _selectDate(context);
               },
               child: Container(
                 child: Row(
                   children: <Widget>[
                     Text(
-                      formatter.format(DateTime.now()),
+                      formatter.format(p.selectedDate),
                       textScaleFactor: 1.8,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,

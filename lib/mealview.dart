@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'parser.dart';
+import 'package:provider/provider.dart';
+import 'dateprovider.dart';
 
 class MealView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var p = Provider.of<DateSelector>(context);
     EdgeInsets padding = MediaQuery.of(context).padding;
     Size size = MediaQuery.of(context).size;
     return Container(
@@ -16,12 +19,12 @@ class MealView extends StatelessWidget {
         )
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 17, top: 25, bottom: 11),
+        padding: const EdgeInsets.only(right: 17, top: 17, bottom: 11),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             FutureBuilder(
-              future: getMeals(DateTime.now(), 'meals'),
+              future: getMeals(p.selectedDate, 'meals'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return Text(
@@ -29,6 +32,7 @@ class MealView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                     ),
+                    textAlign: TextAlign.end,
                   );
                 } else {
                   return Center(
@@ -39,10 +43,11 @@ class MealView extends StatelessWidget {
             ),
             Spacer(),
             FutureBuilder(
-              future: getMeals(DateTime.now(), 'kcal'),
+              future: getMeals(p.selectedDate, 'kcal'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text(
