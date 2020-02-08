@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geupsik_flutter_alpha/modules/autodatelisting.dart';
 import 'parser.dart';
 import 'package:provider/provider.dart';
 import 'dateprovider.dart';
@@ -6,8 +7,18 @@ import 'dateprovider.dart';
 class MealView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    var p = Provider.of<DateSelector>(context);
+    List<DateTime> dateList = AutoDateListing().list(p.selectedDate);
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          DateTime date = dateList[index];
+          return ListTile(
+            title: Text('$date'),
+          );
+        },
+        childCount: dateList.length
+      ),
     );
   }
 }

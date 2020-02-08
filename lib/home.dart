@@ -10,12 +10,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TopBar(),
-        Spacer(),
-        MealView()
-      ],
-    );
+    return MealView();
   }
 }

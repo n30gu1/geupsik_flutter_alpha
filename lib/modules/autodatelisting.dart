@@ -2,7 +2,6 @@ import 'package:intl/intl.dart';
 
 class AutoDateListing {
   List<DateTime> list(DateTime date) {
-
     DateFormat f = DateFormat('EEEE');
     List<DateTime> addToList(int start, int end) {
       List<DateTime> list = [];
@@ -17,11 +16,20 @@ class AutoDateListing {
       case 'Monday':
         return addToList(0, 4);
       case 'Tuesday':
-        return addToList(-1, 3);
+        List<DateTime> dates = addToList(-1, 3)
+        ..removeAt(1)
+        ..insert(0, DateTime.now());
+        return dates;
       case 'Wednesday':
-        return addToList(-2, 2);
+        List<DateTime> dates = addToList(-2, 2)
+        ..removeAt(2)
+        ..insert(0, DateTime.now());
+        return dates;
       case 'Friday':
-        return addToList(-3, 1);
+        List<DateTime> dates = addToList(-3, 1)
+        ..removeAt(3)
+        ..insert(0, DateTime.now());
+        return dates;
       case 'Saturday':
         return addToList(2, 6);
       default:
