@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:geupsik_flutter_alpha/modules/animatedbutton.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
 import 'dateprovider.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
             ),
             darkTheme: ThemeData.dark(),
             home: Scaffold(
-              body: Home()
+              body: Home(),
+              floatingActionButton: AnimatedButton(),
             ),
           );
         },

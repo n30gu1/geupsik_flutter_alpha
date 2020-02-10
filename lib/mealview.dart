@@ -13,8 +13,42 @@ class MealView extends StatelessWidget {
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           DateTime date = dateList[index];
-          return ListTile(
-            title: Text('$date'),
+          Meals meals = Meals();
+          return FutureBuilder(
+            future: meals.get(date),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(meals.meal),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text(
+                          meals.kcal,
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 3, left: 3),
+                          child: Text(
+                            'kcal'
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
           );
         },
         childCount: dateList.length
