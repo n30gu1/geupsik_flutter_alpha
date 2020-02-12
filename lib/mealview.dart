@@ -18,30 +18,62 @@ class MealView extends StatelessWidget {
             future: meals.get(date),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(meals.meal),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
-                        Text(
-                          meals.kcal,
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        child: Text(
+                          '2020/2/12',
                           style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 3, left: 3),
-                          child: Text(
-                            'kcal'
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.grey[200],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                meals.meal,
+                                style: TextStyle(
+                                  fontSize: 15
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: <Widget>[
+                                  Text(
+                                    meals.kcal,
+                                    style: TextStyle(
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(bottom: 3, left: 1),
+                                    child: Text(
+                                      'kcal'
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                  ],
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               } else {
                 return Center(
